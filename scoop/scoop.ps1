@@ -27,7 +27,7 @@ foreach ($bucket in $buckets) {
 }
 
 try {
-    scoop install git
+    scoop install git 7zip
     Write-Host "Git 已安装成功。" -ForegroundColor Green
 } catch {
     throw "Git 安装失败，请检查网络连接或权限。$($_.Exception.Message)"

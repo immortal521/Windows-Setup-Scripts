@@ -3,7 +3,7 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     throw "Scoop 未安装。$($_.Exception.Message)"
 }
 
-Write-Host "正在通过 Scoop 安装 Git..." -ForegroundColor Cyan
+Write-Host "正在通过 Scoop 安装 Maven..." -ForegroundColor Cyan
 scoop install maven
 
 $configDir = "C:\Apps\scoop\apps\maven\current\conf\setting.xml"
