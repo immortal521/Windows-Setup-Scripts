@@ -7,7 +7,7 @@ Write-Host "正在通过 Scoop 安装 Git..." -ForegroundColor Cyan
 scoop install maven
 
 $configDir = "C:\Apps\scoop\apps\maven\current\conf\setting.xml"
-$settingFileUrl = ""
+$settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/setting.xml"
 
 if (Test-Path $settingsDestPath) {
       Write-Host "Maven 配置文件已存在，正在覆盖..." -ForegroundColor Yellow
