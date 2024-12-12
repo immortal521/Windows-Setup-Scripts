@@ -37,3 +37,17 @@ try {
 } catch {
     Write-Host "刷新 DNS 缓存失败，请手动运行 'ipconfig /flushdns'。" -ForegroundColor Red
 }
+
+$scriotUrls = @(
+  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/scoop.ps1"
+)
+
+foreach ($url in $scriotUrls) {
+  try {
+    Write-Host "正在执行脚本: $url" -ForegroundColor Cyan
+      iwr -useb $url | iex
+    }
+  catch {
+    Write-Host $_ -ForegroundColor Red
+  }
+}
