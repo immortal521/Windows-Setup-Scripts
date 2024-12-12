@@ -40,8 +40,10 @@ try {
 
 $scriotUrls = @(
   "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/scoop/scoop.ps1",
+  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/powershell/powershell.ps1",
+  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/nodejs/nodejs.ps1"
+  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/nvim/nvim.ps1",
   "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/maven.ps1",
-  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/nvim/nvim.ps1"
 )
 
 foreach ($url in $scriotUrls) {
