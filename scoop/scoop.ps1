@@ -1,3 +1,12 @@
+# 确保 PowerShell 的执行策略允许运行脚本
+try {
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+    Write-Host "执行策略已设置为 RemoteSigned。" -ForegroundColor Yellow
+} catch {
+    Write-Host "无法设置执行策略，请手动修改后重新运行脚本。" -ForegroundColor Red
+    exit 1
+}
+
 # 安装 Scoop
 try {
     iwr -useb get.scoop.sh | iex
