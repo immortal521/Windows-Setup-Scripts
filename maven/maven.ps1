@@ -5,6 +5,9 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
 
 Write-Host "正在通过 Scoop 安装 Maven..." -ForegroundColor Cyan
 scoop install maven
+$repoDir = $env:USERPROFILE + "\.repo\maven"
+
+mkdir $repoDir
 
 $configDir = "C:\Apps\scoop\apps\maven\current\conf\setting.xml"
 $settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/setting.xml"
