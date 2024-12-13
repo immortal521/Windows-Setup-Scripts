@@ -1,9 +1,9 @@
-# ¼ì²é Scoop ÊÇ·ñÒÑ°²×°
+# æ£€æŸ¥ Scoop æ˜¯å¦å·²å®‰è£…
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-    throw "Scoop Î´°²×°¡£$($_.Exception.Message)"
+    throw "Scoop æœªå®‰è£…ã€‚$($_.Exception.Message)"
 }
 
-Write-Host "ÕıÔÚÍ¨¹ı Scoop °²×° Maven..." -ForegroundColor Cyan
+Write-Host "æ­£åœ¨é€šè¿‡ Scoop å®‰è£… Maven..." -ForegroundColor Cyan
 scoop install maven
 $repoDir = $env:USERPROFILE + "\.repo\maven"
 
@@ -13,9 +13,9 @@ $configDir = "C:\Apps\scoop\apps\maven\current\conf\setting.xml"
 $settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/setting.xml"
 
 if (Test-Path $settingsDestPath) {
-      Write-Host "Maven ÅäÖÃÎÄ¼şÒÑ´æÔÚ£¬ÕıÔÚ¸²¸Ç..." -ForegroundColor Yellow
+      Write-Host "Maven é…ç½®æ–‡ä»¶å·²å­˜åœ¨ï¼Œæ­£åœ¨è¦†ç›–..." -ForegroundColor Yellow
 }
 
 Invoke-WebRequest -Uri $settingFileUrl -OutFile $configDir
 
-Write-Host "Maven ÅäÖÃÍê³É£¬settings.xml ÒÑÓ¦ÓÃ¡£" -ForegroundColor Green
+Write-Host "Maven é…ç½®å®Œæˆï¼Œsettings.xml å·²åº”ç”¨ã€‚" -ForegroundColor Green

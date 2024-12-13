@@ -1,9 +1,9 @@
-# ¼ì²é Scoop ÊÇ·ñÒÑ°²×°
+# æ£€æŸ¥ Scoop æ˜¯å¦å·²å®‰è£…
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-    throw "Scoop Î´°²×°¡£$($_.Exception.Message)"
+    throw "Scoop æœªå®‰è£…ã€‚$($_.Exception.Message)"
 }
 
-Write-Host "ÕıÔÚÍ¨¹ı Scoop °²×° nodejs..." -ForegroundColor Cyan
+Write-Host "æ­£åœ¨é€šè¿‡ Scoop å®‰è£… nodejs..." -ForegroundColor Cyan
 
 scoop install nodejs
 
@@ -18,9 +18,9 @@ mkdir $npmCache
 if ($env:PATH -notlike "*$npmPrefix*") {
     $env:PATH = $npmPrefix + ";" + $env:PATH
     [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, [System.EnvironmentVariableTarget]::User)
-    Write-Host "Â·¾¶ÒÑÌí¼Óµ½ PATH »·¾³±äÁ¿ÖĞ¡£"
+    Write-Host "è·¯å¾„å·²æ·»åŠ åˆ° PATH ç¯å¢ƒå˜é‡ä¸­ã€‚"
 } else {
-    Write-Host "¸ÃÂ·¾¶ÒÑ¾­´æÔÚÓÚ PATH »·¾³±äÁ¿ÖĞ¡£"
+    Write-Host "è¯¥è·¯å¾„å·²ç»å­˜åœ¨äº PATH ç¯å¢ƒå˜é‡ä¸­ã€‚"
 }
 
 npm i -g pnpm
@@ -43,8 +43,8 @@ pnpm config ser state-dir $pnpmState
 if ($env:PATH -notlike "*$pnpmGlobal*") {
       $env:PATH = $pnpmGlobal + ";" + $env:PATH
       [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, [System.EnvironmentVariableTarget]::User)
-      Write-Host "Â·¾¶ÒÑÌí¼Óµ½ PATH »·¾³±äÁ¿ÖĞ¡£"
+      Write-Host "è·¯å¾„å·²æ·»åŠ åˆ° PATH ç¯å¢ƒå˜é‡ä¸­ã€‚"
 } else {
-      Write-Host "¸ÃÂ·¾¶ÒÑ¾­´æÔÚÓÚ PATH »·¾³±äÁ¿ÖĞ¡£"
+      Write-Host "è¯¥è·¯å¾„å·²ç»å­˜åœ¨äº PATH ç¯å¢ƒå˜é‡ä¸­ã€‚"
 }
 

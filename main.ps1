@@ -1,8 +1,10 @@
-# ¶¨ÒåÂ·¾¶
+chcp 65001
+
+# å®šä¹‰è·¯å¾„
 $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
 $tempHostsPath = "$env:Temp\hosts"
 
-# ¶¨Òå GitHub DNS ½âÎö¼ÇÂ¼
+# å®šä¹‰ GitHub DNS è§£æè®°å½•
 $githubDNS = @"
 # GitHub DNS Start
 140.82.113.4    github.com
@@ -18,28 +20,28 @@ $githubDNS = @"
 # GitHub DNS End
 "@
 
-# ¶ÁÈ¡ hosts ÄÚÈİ
+# è¯»å– hosts å†…å®¹
 $hostsContent = Get-Content $hostsPath
 
-# ¼ì²éÊÇ·ñÒÑ´æÔÚ GitHub DNS
+# æ£€æŸ¥æ˜¯å¦å·²å­˜åœ¨ GitHub DNS
 if ($hostsContent -notcontains "# GitHub DNS Start") {
-    # ´´½¨ÁÙÊ±ÎÄ¼ş
+    # åˆ›å»ºä¸´æ—¶æ–‡ä»¶
     $updatedContent = $hostsContent + "`r`n" + $githubDNS
     $updatedContent | Set-Content -Path $tempHostsPath -Encoding UTF8
 
-    # Ê¹ÓÃ¹ÜÀíÔ±È¨ÏŞ¸²¸Ç hosts ÎÄ¼ş
+    # ä½¿ç”¨ç®¡ç†å‘˜æƒé™è¦†ç›– hosts æ–‡ä»¶
     Start-Process -FilePath "powershell" -ArgumentList "-Command `"Copy-Item -Path '$tempHostsPath' -Destination '$hostsPath' -Force`"" -Verb RunAs
-    Write-Host "ÒÑ³É¹¦¸üĞÂ hosts ÎÄ¼ş¡£" -ForegroundColor Green
+    Write-Host "å·²æˆåŠŸæ›´æ–° hosts æ–‡ä»¶ã€‚" -ForegroundColor Green
 } else {
-    Write-Host "hosts ÎÄ¼şÖĞÒÑ°üº¬ GitHub DNS£¬ÎŞĞèÖØ¸´Ğ´Èë¡£" -ForegroundColor Yellow
+    Write-Host "hosts æ–‡ä»¶ä¸­å·²åŒ…å« GitHub DNSï¼Œæ— éœ€é‡å¤å†™å…¥ã€‚" -ForegroundColor Yellow
 }
 
-# Ë¢ĞÂ DNS »º´æ
+# åˆ·æ–° DNS ç¼“å­˜
 try {
     ipconfig /flushdns | Out-Null
-    Write-Host "DNS »º´æÒÑË¢ĞÂ¡£" -ForegroundColor Green
+    Write-Host "DNS ç¼“å­˜å·²åˆ·æ–°ã€‚" -ForegroundColor Green
 } catch {
-    Write-Host "Ë¢ĞÂ DNS »º´æÊ§°Ü£¬ÇëÊÖ¶¯ÔËĞĞ 'ipconfig /flushdns'¡£" -ForegroundColor Red
+    Write-Host "åˆ·æ–° DNS ç¼“å­˜å¤±è´¥ï¼Œè¯·æ‰‹åŠ¨è¿è¡Œ 'ipconfig /flushdns'ã€‚" -ForegroundColor Red
 }
 
 $scriotUrls = @(
@@ -52,7 +54,7 @@ $scriotUrls = @(
 
 foreach ($url in $scriotUrls) {
   try {
-    Write-Host "ÕıÔÚÖ´ĞĞ½Å±¾: $url" -ForegroundColor Cyan
+    Write-Host "æ­£åœ¨æ‰§è¡Œè„šæœ¬: $url" -ForegroundColor Cyan
       iwr -useb $url | iex
     }
   catch {
