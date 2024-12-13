@@ -1,21 +1,31 @@
-# È·±£ PowerShell µÄÖ´ĞĞ²ßÂÔÔÊĞíÔËĞĞ½Å±¾
+# ç¡®ä¿ PowerShell çš„æ‰§è¡Œç­–ç•¥å…è®¸è¿è¡Œè„šæœ¬
 try {
     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-    Write-Host "Ö´ĞĞ²ßÂÔÒÑÉèÖÃÎª RemoteSigned¡£" -ForegroundColor Yellow
+    Write-Host "æ‰§è¡Œç­–ç•¥å·²è®¾ç½®ä¸º RemoteSignedã€‚" -ForegroundColor Yellow
 } catch {
-    Write-Host "ÎŞ·¨ÉèÖÃÖ´ĞĞ²ßÂÔ£¬ÇëÊÖ¶¯ĞŞ¸ÄºóÖØĞÂÔËĞĞ½Å±¾¡£" -ForegroundColor Red
+    Write-Host "æ— æ³•è®¾ç½®æ‰§è¡Œç­–ç•¥ï¼Œè¯·æ‰‹åŠ¨ä¿®æ”¹åé‡æ–°è¿è¡Œè„šæœ¬ã€‚" -ForegroundColor Red
     exit 1
 }
 
-# °²×° Scoop
+$env:SCOOP='C:\Apps\Scoop'
+[environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
+
+# å®‰è£… Scoop
 try {
     iwr -useb https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1 | iex
-    Write-Host "Scoop °²×°³É¹¦¡£" -ForegroundColor Green
+    Write-Host "Scoop å®‰è£…æˆåŠŸã€‚" -ForegroundColor Green
 } catch {
-    throw "Scoop °²×°Ê§°Ü£¬Çë¼ì²éÍøÂçÁ¬½Ó»òÈ¨ÏŞ¡£$($_.Exception.Message)"
+    throw "Scoop å®‰è£…å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿æ¥æˆ–æƒé™ã€‚$($_.Exception.Message)"
 }
 
-# Scoop Bucket ÁĞ±í
+try {
+    scoop install git 7zip
+    Write-Host "Git å·²å®‰è£…æˆåŠŸã€‚" -ForegroundColor Green
+} catch {
+    throw "Git å®‰è£…å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿æ¥æˆ–æƒé™ã€‚$($_.Exception.Message)"
+}
+
+# Scoop Bucket åˆ—è¡¨
 $buckets = @(
   "main",
   "extras",
@@ -25,28 +35,21 @@ $buckets = @(
   "ImmortBucket https://github.com/immortal521/ImmortBucket"
 )
 
-# Ìí¼Ó Scoop ¶îÍâµÄ bucket£¨ÀıÈç extras£©
+# æ·»åŠ  Scoop é¢å¤–çš„ bucketï¼ˆä¾‹å¦‚ extrasï¼‰
 foreach ($bucket in $buckets) {
     try {
         scoop bucket add $bucket
-        Write-Host "ÒÑÌí¼Ó Scoop bucket: $bucket" -ForegroundColor Green
+        Write-Host "å·²æ·»åŠ  Scoop bucket: $bucket" -ForegroundColor Green
     } catch {
-        throw "Ìí¼Ó Scoop bucket $bucket Ê§°Ü¡£$($_.Exception.Message)"
+        throw "æ·»åŠ  Scoop bucket $bucket å¤±è´¥ã€‚$($_.Exception.Message)"
     }
 }
 
 try {
-    scoop install git 7zip
-    Write-Host "Git ÒÑ°²×°³É¹¦¡£" -ForegroundColor Green
-} catch {
-    throw "Git °²×°Ê§°Ü£¬Çë¼ì²éÍøÂçÁ¬½Ó»òÈ¨ÏŞ¡£$($_.Exception.Message)"
-}
-
-try {
     scoop install aria2
-    Write-Host "Aria2 ÒÑ°²×°³É¹¦¡£" -ForegroundColor Green
+    Write-Host "Aria2 å·²å®‰è£…æˆåŠŸã€‚" -ForegroundColor Green
 } catch {
-    throw "Aria2 °²×°Ê§°Ü£¬Çë¼ì²éÍøÂçÁ¬½Ó»òÈ¨ÏŞ¡£$($_.Exception.Message)"
+    throw "Aria2 å®‰è£…å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿æ¥æˆ–æƒé™ã€‚$($_.Exception.Message)"
 }
 
 try {
@@ -54,7 +57,7 @@ try {
   scoop config aria2-spliy 8
   scoop config aria2-warning-enabled false
 } catch {
-  throw "ÅäÖÃ aria2 Ê§°Ü¡£$($_.Exception.Message)"
+  throw "é…ç½® aria2 å¤±è´¥ã€‚$($_.Exception.Message)"
 }
 
 $softwareList = @(
@@ -102,8 +105,8 @@ $softwareList = @(
 foreach ($software in $softwareList) {
     try {
         scoop install $software
-        Write-Host "$software °²×°³É¹¦¡£" -ForegroundColor Green
+        Write-Host "$software å®‰è£…æˆåŠŸã€‚" -ForegroundColor Green
     } catch {
-        Write-Host "$software °²×°Ê§°Ü¡£" -ForegroundColor Red
+        Write-Host "$software å®‰è£…å¤±è´¥ã€‚" -ForegroundColor Red
     }
 }
