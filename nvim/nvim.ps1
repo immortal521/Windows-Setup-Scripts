@@ -1,9 +1,9 @@
-# æ£€æŸ¥ Scoop æ˜¯å¦å·²å®‰è£…
+# ¼ì²é Scoop ÊÇ·ñÒÑ°²×°
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-    throw "Scoop æœªå®‰è£…ã€‚$($_.Exception.Message)"
+    throw "Scoop Î´°²×°¡£$($_.Exception.Message)"
 }
 
-Write-Host "æ­£åœ¨é€šè¿‡ Scoop å®‰è£… nvim neovide..." -ForegroundColor Cyan
+Write-Host "ÕıÔÚÍ¨¹ı Scoop °²×° nvim neovide..." -ForegroundColor Cyan
 
 scoop install neovim neovide
 

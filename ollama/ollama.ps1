@@ -1,8 +1,8 @@
 if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-    throw "Scoop æœªå®‰è£…ã€‚$($_.Exception.Message)"
+    throw "Scoop Î´°²×°¡£$($_.Exception.Message)"
 }
 
-Write-Host "æ­£åœ¨é€šè¿‡ Scoop å®‰è£… ollama..." -ForegroundColor Cyan
+Write-Host "ÕýÔÚÍ¨¹ý Scoop °²×° ollama..." -ForegroundColor Cyan
 
 scoop install ollama-full
 

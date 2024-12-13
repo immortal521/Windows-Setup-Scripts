@@ -7,19 +7,19 @@ $modules = @(
 foreach ($module in $modules) {
     if (-not (Get-InstalledModule -Name $module -ErrorAction SilentlyContinue)) {
         Install-Module -Name $module -Force -Scope CurrentUser
-        Write-Host "$module æ¨¡å—å·²æˆåŠŸå®‰è£…ã€‚" -ForegroundColor Green
+        Write-Host "$module Ä£¿éÒÑ³É¹¦°²×°¡£" -ForegroundColor Green
     } else {
-        Write-Host "$module æ¨¡å—å·²å®‰è£…ã€‚" -ForegroundColor Yellow
+        Write-Host "$module Ä£¿éÒÑ°²×°¡£" -ForegroundColor Yellow
     }
 }
 
 $destinationPath = $env:USERPROFILE + "\Documents\WindowsPowerShellMicrosoft.PowerShell_profile.ps1"
-$settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/powershell/Microsoft.PowerShell_profile.ps1"  # æ›¿æ¢ä¸ºå®é™…çš„ URL
+$settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/powershell/Microsoft.PowerShell_profile.ps1"  # Ìæ»»ÎªÊµ¼ÊµÄ URL
 
 if (-not (Test-Path $destinationPath)) {
       New-Item -ItemType Directory -Path $destinationPath -Force
-      Write-Host "ç›®æ ‡ç›®å½•å·²åˆ›å»ºï¼š$destinationPath" -ForegroundColor Green
+      Write-Host "Ä¿±êÄ¿Â¼ÒÑ´´½¨£º$destinationPath" -ForegroundColor Green
 }
 
 Invoke-WebRequest -Uri $settingFileUrl -OutFile $destinationPath
-Write-Host "è®¾ç½®æ–‡ä»¶å·²ä¸‹è½½åˆ°ï¼š$destinationPath" -ForegroundColor Green
+Write-Host "ÉèÖÃÎÄ¼şÒÑÏÂÔØµ½£º$destinationPath" -ForegroundColor Green

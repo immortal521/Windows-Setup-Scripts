@@ -1,7 +1,8 @@
-# å®šä¹‰ hosts æ–‡ä»¶è·¯å¾„
+# ¶¨ÒåÂ·¾¶
 $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
+$tempHostsPath = "$env:Temp\hosts"
 
-# å®šä¹‰ GitHub DNS è§£æè®°å½•ï¼ˆå¯ä»¥æ ¹æ®éœ€è¦æ›´æ–°ï¼‰
+# ¶¨Òå GitHub DNS ½âÎö¼ÇÂ¼
 $githubDNS = @"
 # GitHub DNS Start
 140.82.113.4    github.com
@@ -17,25 +18,28 @@ $githubDNS = @"
 # GitHub DNS End
 "@
 
-# æ£€æŸ¥å¹¶å†™å…¥ GitHub DNS åˆ° hosts æ–‡ä»¶
-if (-not (Get-Content $hostsPath | Select-String -Pattern "GitHub DNS Start")) {
-    try {
-        Add-Content -Path $hostsPath -Value $githubDNS
-        Write-Host "å·²æˆåŠŸå°† GitHub DNS å†™å…¥ hosts æ–‡ä»¶ã€‚" -ForegroundColor Green
-    } catch {
-        Write-Host "å†™å…¥ GitHub DNS å¤±è´¥ï¼Œè¯·ä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œè„šæœ¬ã€‚" -ForegroundColor Red
-        exit 1
-    }
+# ¶ÁÈ¡ hosts ÄÚÈİ
+$hostsContent = Get-Content $hostsPath
+
+# ¼ì²éÊÇ·ñÒÑ´æÔÚ GitHub DNS
+if ($hostsContent -notcontains "# GitHub DNS Start") {
+    # ´´½¨ÁÙÊ±ÎÄ¼ş
+    $updatedContent = $hostsContent + "`r`n" + $githubDNS
+    $updatedContent | Set-Content -Path $tempHostsPath -Encoding UTF8
+
+    # Ê¹ÓÃ¹ÜÀíÔ±È¨ÏŞ¸²¸Ç hosts ÎÄ¼ş
+    Start-Process -FilePath "powershell" -ArgumentList "-Command `"Copy-Item -Path '$tempHostsPath' -Destination '$hostsPath' -Force`"" -Verb RunAs
+    Write-Host "ÒÑ³É¹¦¸üĞÂ hosts ÎÄ¼ş¡£" -ForegroundColor Green
 } else {
-    Write-Host "hosts æ–‡ä»¶ä¸­å·²åŒ…å« GitHub DNSï¼Œæ— éœ€é‡å¤å†™å…¥ã€‚" -ForegroundColor Yellow
+    Write-Host "hosts ÎÄ¼şÖĞÒÑ°üº¬ GitHub DNS£¬ÎŞĞèÖØ¸´Ğ´Èë¡£" -ForegroundColor Yellow
 }
 
-# åˆ·æ–° DNS ç¼“å­˜
+# Ë¢ĞÂ DNS »º´æ
 try {
     ipconfig /flushdns | Out-Null
-    Write-Host "DNS ç¼“å­˜å·²åˆ·æ–°ã€‚" -ForegroundColor Green
+    Write-Host "DNS »º´æÒÑË¢ĞÂ¡£" -ForegroundColor Green
 } catch {
-    Write-Host "åˆ·æ–° DNS ç¼“å­˜å¤±è´¥ï¼Œè¯·æ‰‹åŠ¨è¿è¡Œ 'ipconfig /flushdns'ã€‚" -ForegroundColor Red
+    Write-Host "Ë¢ĞÂ DNS »º´æÊ§°Ü£¬ÇëÊÖ¶¯ÔËĞĞ 'ipconfig /flushdns'¡£" -ForegroundColor Red
 }
 
 $scriotUrls = @(
@@ -43,12 +47,12 @@ $scriotUrls = @(
   "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/powershell/powershell.ps1",
   "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/nodejs/nodejs.ps1"
   "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/nvim/nvim.ps1",
-  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/maven.ps1",
+  "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/maven.ps1"
 )
 
 foreach ($url in $scriotUrls) {
   try {
-    Write-Host "æ­£åœ¨æ‰§è¡Œè„šæœ¬: $url" -ForegroundColor Cyan
+    Write-Host "ÕıÔÚÖ´ĞĞ½Å±¾: $url" -ForegroundColor Cyan
       iwr -useb $url | iex
     }
   catch {
