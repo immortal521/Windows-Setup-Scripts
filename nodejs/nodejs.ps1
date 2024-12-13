@@ -19,7 +19,8 @@ if ($env:PATH -notlike "*$npmPrefix*") {
     $env:PATH = $npmPrefix + ";" + $env:PATH
     [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, [System.EnvironmentVariableTarget]::User)
     Write-Host "路径已添加到 PATH 环境变量中。"
-} else {
+}
+else {
     Write-Host "该路径已经存在于 PATH 环境变量中。"
 }
 
@@ -41,10 +42,11 @@ pnpm config set cache-dir $pnpmCache
 pnpm config ser state-dir $pnpmState
 
 if ($env:PATH -notlike "*$pnpmGlobal*") {
-      $env:PATH = $pnpmGlobal + ";" + $env:PATH
-      [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, [System.EnvironmentVariableTarget]::User)
-      Write-Host "路径已添加到 PATH 环境变量中。"
-} else {
-      Write-Host "该路径已经存在于 PATH 环境变量中。"
+    $env:PATH = $pnpmGlobal + ";" + $env:PATH
+    [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, [System.EnvironmentVariableTarget]::User)
+    Write-Host "路径已添加到 PATH 环境变量中。"
+}
+else {
+    Write-Host "该路径已经存在于 PATH 环境变量中。"
 }
 

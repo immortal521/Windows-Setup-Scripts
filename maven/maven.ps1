@@ -13,7 +13,7 @@ $configDir = "C:\Apps\scoop\apps\maven\current\conf\setting.xml"
 $settingFileUrl = "https://raw.githubusercontent.com/immortal521/Windows-Setup-Scripts/refs/heads/main/maven/setting.xml"
 
 if (Test-Path $settingsDestPath) {
-      Write-Host "Maven 配置文件已存在，正在覆盖..." -ForegroundColor Yellow
+    Write-Host "Maven 配置文件已存在，正在覆盖..." -ForegroundColor Yellow
 }
 
 Invoke-WebRequest -Uri $settingFileUrl -OutFile $configDir
